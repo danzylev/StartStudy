@@ -11,6 +11,11 @@ public class Lect3 {
         learnArrays3();
         learnArrays4();
         learnArrays5();
+        learnArrays6();
+        learnArrays7();
+        learnArrays8();
+        learnArrays9();
+        learnArrays10();
     }
 
     public static void learnArrays1(){
@@ -84,8 +89,8 @@ public class Lect3 {
         int[] n1 = new int[5];
         int[] n2 = new int[5];
         for (int i = 0; i < n1.length; i++) {
-            n1[i] = (int) (Math.random() * 5) + 1;
-            n2[i] = (int) (Math.random() * 5) + 1;
+            n1[i] = (int) (Math.random() * 6);
+            n2[i] = (int) (Math.random() * 6);
         }
         System.out.println(Arrays.toString(n1));
         System.out.println(Arrays.toString(n2));
@@ -98,6 +103,94 @@ public class Lect3 {
         if (s1 == s2) System.out.println("Средние арифметические массивов равны!");
         else if (s1 > s2) System.out.println("Среднее арифметическое первого массива больше!");
         else System.out.println("Среднее арифметическое первого массива меньше!");
+    }
+    public static void learnArrays6(){
+        /*
+        6) Создайте массив из 4 случайных целых чисел из отрезка [10;99], выведите его на экран в строку.
+        Определить и вывести на экран сообщение о том, является ли массив строго возрастающей последовательностью.
+        */
+        System.out.println("Массивы 6:");
+        int[] arr = new int[4];
+        for (int i = 0; i < arr.length; i++) arr[i] = (int) (Math.random()*90) + 10;
+        System.out.println(Arrays.toString(arr));
+        int[] arr2 = Arrays.copyOf(arr,arr.length);
+        Arrays.sort(arr);
+        if (Arrays.equals(arr, arr2)) System.out.println("Массив является строго возрастающим");
+        else System.out.println("Массив не является строго возрастающим");
+    }
+    public static void learnArrays7(){
+        /*
+        7) Создайте массив из 20-ти первых чисел Фибоначчи и выведите его на экран. Напоминаем, что первый и второй
+        члены последовательности равны единицам, а каждый следующий — сумме двух предыдущих.
+        */
+        System.out.println("Массивы 7");
+        int[] arr = new int[20];
+        arr[0] = 1;
+        arr[1] = 2;
+        for (int i = 2; i < arr.length; i++) arr[i] = arr[i-2] + arr[i-1];
+        System.out.println("Первые 20 чисел Фибоначчи равны: " + Arrays.toString(arr));
+    }
+    public static void learnArrays8(){
+        /*
+        8) Создайте массив из 12 случайных целых чисел из отрезка [-15;15]. Определите какой элемент является в этом
+        массиве максимальным и сообщите индекс его последнего вхождения в массив.
+        */
+        System.out.println("Массивы 8");
+        int[] arr = new int[12];
+        for (int i = 0; i < arr.length; i++) arr[i] = (int) (Math.random() * 31) - 15;
+        System.out.println(Arrays.toString(arr));
+        int[] arr2 = Arrays.copyOf(arr,arr.length);
+        Arrays.sort(arr2);
+        int max = arr2[arr2.length-1];
+        System.out.println("Максимальный элемент массива равен " + max + " и он стоит под индексом " + Arrays.binarySearch(arr, max));
+    }
+    public static void learnArrays9(){
+        /*
+        9) Создайте два массива из 10 целых случайных чисел из отрезка [1;9] и третий массив из 10 действительных чисел.
+        Каждый элемент с i-ым индексом третьего массива должен равняться отношению элемента из первого массива с i-ым индексом
+        к элементу из второго массива с i-ым индексом.
+        Вывести все три массива на экран (каждый на отдельной строке), затем вывести количество целых элементов в третьем массиве.
+        */
+        System.out.println("Массивы 9");
+        int[] arr1 = new int[10];
+        int[] arr2 = new int[10];
+        int n = 0; //задаем счетчик целых чисел
+        for (int i = 0; i < arr1.length; i++) {
+            arr1[i] = (int) (Math.random() * 9 + 1);
+            arr2[i] = (int) (Math.random() * 9 + 1);
+            if (arr1[i] % arr2[i] == 0) n++;
+        }
+        double[] arr3 = new double[10];
+        System.out.println(Arrays.toString(arr1));
+        System.out.println(Arrays.toString(arr2));
+        for (int i = 0; i < arr3.length; i++) arr3[i] = (double) arr1[i] / arr2[i];
+        System.out.println(Arrays.toString(arr3));
+        System.out.println("В данном массиве " + n + " целых значений.");
+    }
+    public static void learnArrays10(){
+        /*
+        10) Создайте массив из 11 случайных целых чисел из отрезка [-1;1], выведите массив на экран в строку.
+        Определите какой элемент встречается в массиве чаще всего и выведите об этом сообщение на экран.
+        Если два каких-то элемента встречаются одинаковое количество раз, то не выводите ничего.
+        */
+        System.out.println("Массивы 10");
+        int[] arr = new int[11];
+        int[] c = new int[11]; //в этом массиве будут считаться повторения
+        for (int i = 0; i < arr.length; i++) arr[i] = (int) (Math.random() * 3) - 1;
+        System.out.println(Arrays.toString(arr));
+        for (int i = 0; i < arr.length; i++){
+            for (int n = 0; n < arr.length; n++)
+                if (arr[i] == arr[n]) c[i] ++;
+        }
+        //создадим массив, который можем попортить для сортировки
+        int[] b = Arrays.copyOf(c, c.length);
+        Arrays.sort(b);
+        if (b[10] == b[9]) {        //здесь пока затык. Должно быть условие >. То есть если есть явный лидер по популярности.
+            int freq = b[10];
+            int index;
+            index = Arrays.binarySearch(c, freq);
+            System.out.println("Элемент массива " + Arrays.toString(arr) + " под индексом " + index + " встречается чаще всего.");
+        }
 
     }
 }
