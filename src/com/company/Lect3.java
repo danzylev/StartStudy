@@ -16,6 +16,9 @@ public class Lect3 {
         learnArrays8();
         learnArrays9();
         learnArrays10();
+        learnArrays11();
+
+        learnArrays13();
     }
 
     public static void learnArrays1(){
@@ -175,7 +178,7 @@ public class Lect3 {
         */
         System.out.println("Массивы 10");
         int[] arr = new int[11];
-        int[] c = new int[11]; //в этом массиве будут считаться повторения
+        int[] c = {0,0,0,0,0,0,0,0,0,0,0}; //в этом массиве будут считаться повторения каждого элемента
         for (int i = 0; i < arr.length; i++) arr[i] = (int) (Math.random() * 3) - 1;
         System.out.println(Arrays.toString(arr));
         for (int i = 0; i < arr.length; i++){
@@ -185,12 +188,94 @@ public class Lect3 {
         //создадим массив, который можем попортить для сортировки
         int[] b = Arrays.copyOf(c, c.length);
         Arrays.sort(b);
-        if (b[10] == b[9]) {        //здесь пока затык. Должно быть условие >. То есть если есть явный лидер по популярности.
+        if (b[10] != b[9]) {        //если в отсортированном массиве популярности два лидера разные по frequency
             int freq = b[10];
             int index;
             index = Arrays.binarySearch(c, freq);
             System.out.println("Элемент массива " + Arrays.toString(arr) + " под индексом " + index + " встречается чаще всего.");
         }
+    }
+    public static void learnArrays11(){
+        /*
+        11) Пользователь должен указать с клавиатуры чётное положительное число, а программа должна создать массив
+        указанного размера из случайных целых чисел из [-5;5] и вывести его на экран в строку. После этого программа
+        должна определить и сообщить пользователю о том, сумма модулей какой половины массива больше: левой или правой,
+        либо сообщить, что эти суммы модулей равны. Если пользователь введёт неподходящее число, то программа должна
+        требовать повторного ввода до тех пор, пока не будет указано корректное значение.
+         */
+        System.out.println("Массивы 11");
+        int n;
+        do {
+            Scanner lar = new Scanner(System.in);
+            System.out.print("Введите число (длину массива): ");
+            n = lar.nextInt();
+            if (n % 2 != 0) System.out.println("Введите четное число");
+        } while (n % 2 != 0);
+        int[] arr = new int[n];
+        for (int i = 0; i < arr.length; i++) arr[i] = (int)(Math.random()*11) - 5;
+        System.out.println(Arrays.toString(arr));
+        int sum1 = 0; //в эти переменные будем заносить суммы модулей
+        int sum2 = 0;
+        for (int i = 0; i < (n - 1); i++) sum1 = sum1 + Math.abs(arr[i]);
+        for (int i = n / 2; i < n; i++) sum2 = sum2 + Math.abs(arr[i]);
+        if (sum1 > sum2) System.out.println("Сумма модулей левой половины массива больше, чем правой");
+        else if (sum1 < sum2) System.out.println("Сумма модулей правой половины массива больше, чем левой");
+        else System.out.println("Суммы можулей левой и правой половин равны");
+    }
+    public static void learnArrays12(){
+        /*
+        12) Программа должна создать массив из 12 случайных целых чисел из отрезка [-10;10] таким образом, чтобы
+        отрицательных и положительных элементов там было поровну и не было нулей. При этом порядок следования элементов
+        должен быть случаен (т. е. не подходит вариант, когда в массиве постоянно выпадает сначала 6 положительных, а
+        потом 6 отрицательных чисел или же когда элементы постоянно чередуются через один и пр.).
+        Вывести полученный массив на экран.
+         */
+        int[] arr = new int[12];
+        int n1 = 0;
+        while (true) {
+            for (int i = 0; i < (arr.length)/2; i++) {
+                arr[i] = (int) (Math.random()*21) - 10;
+                if (arr[i] == 0) i--;
+            }
+            for (int i = arr.length / 2 - 1; i < (arr.length - 1); i++) {
+                arr[i] = (int) (Math.random()*21) - 10;
+                if (arr[i] == 0) i--;
+            }
 
+            //проверяем количество отрицательных и положительных
+            //пока не доделал. будет очень сложный для компьютера алгоритм
+
+            else break;
+        }
+        System.out.println(Arrays.toString(arr));
+    }
+    public static void learnArrays13(){
+        /*
+        13) Пользователь вводит с клавиатуры натуральное число большее 3, которое сохраняется в переменную n.
+        Если пользователь ввёл не подходящее число, то программа должна просить пользователя повторить ввод.
+        Создать массив из n случайных целых чисел из отрезка [0;n] и вывести его на экран.
+        Создать второй массив только из чётных элементов первого массива, если они там есть, и вывести его на экран.
+         */
+        System.out.println("Массивы 13");
+        int n;
+        do {
+            Scanner lar = new Scanner(System.in);
+            System.out.print("Введите число (длину массива): ");
+            n = lar.nextInt();
+            if (n <=3) System.out.println("Введите число больше 3");
+        } while (n <= 3);
+        int[] arr = new int[n];
+        for (int i = 0; i < arr.length; i++) arr[i] = (int)(Math.random()*(n+1)) + n;
+        System.out.println(Arrays.toString(arr));
+        int[] arr2 = new int[n];
+        int k = 0; //создаем счетчик четных чисел и индекс массива четных чисел
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] % 2 == 0) {
+                arr2[k] = arr[i];
+                k++;
+            }
+        }
+        int[] arr3 = Arrays.copyOf(arr2, k); //удаляем лишние 0
+        System.out.println("Массив из четных чисел вышеуказанного массива: " + Arrays.toString(arr3));
     }
 }
