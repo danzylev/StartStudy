@@ -230,6 +230,7 @@ public class Lect3 {
         потом 6 отрицательных чисел или же когда элементы постоянно чередуются через один и пр.).
         Вывести полученный массив на экран.
          */
+        /*
         int[] arr = new int[12];
         int n1 = 0;
         while (true) {
@@ -248,6 +249,7 @@ public class Lect3 {
             else break;
         }
         System.out.println(Arrays.toString(arr));
+        */
     }
     public static void learnArrays13(){
         /*
@@ -278,4 +280,20 @@ public class Lect3 {
         int[] arr3 = Arrays.copyOf(arr2, k); //удаляем лишние 0
         System.out.println("Массив из четных чисел вышеуказанного массива: " + Arrays.toString(arr3));
     }
+/*
+    public static void crypt(String text, String key){
+        byte[] textBytes = text.getBytes();
+        byte[] keyBytes = key.getBytes();
+        int k = keyBytes.length;
+        for (int i = 0; i < textBytes.length; i++){
+            int i2 = 0;
+            for (i2 = 0; i2 < k; i2++)
+            textBytes[i] ^= keyBytes[i];
+            if (i2 == (k-1)) i2 = i2 - k;
+            return new String(textBytes);
+        }
+        System.out.println(textBytes);
+
+     }
+     */
 }
