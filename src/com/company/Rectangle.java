@@ -12,6 +12,7 @@ public class Rectangle {
         } else System.out.println("Задайте координаты > 0");
     }
     public int spaceRect (Rectangle i){
+        //для проямоугольника
         int h = i.y2 - i.y1;
         int l = i.x2 - i.x1;
         return h*l;
