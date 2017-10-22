@@ -5,13 +5,12 @@ import java.util.Scanner;
 public class IntList {
 
     Item head;
-    int numObjects = 0;
 
     public IntList(Item x) {
-        this.head = x;
+        head = x;
     }
 
-    public Item add(int j) {
+    public void add(int j) {
         Item i = new Item();
         i.next = null;
         i.value = j;
@@ -24,36 +23,60 @@ public class IntList {
             } while (newNext != null);
             lastIt.next = i;
         }
-        return i;
     }
 
     public Item get(int value) {
         int k = value;
+        Item lastIt;
         if (head.value == k) return head;
         else {
             Item newNext = head.next;
-            Item lastIn = head;
+            lastIt = head;
             do {
-                lastIn = newNext;
-                if (lastIn.value == k) return lastIn;
-                }while (lastIn.next != null);
+                if (lastIt.value == k) return lastIt;
+                lastIt = newNext;
+                } while (lastIt.next != null);
         }
-        return null;
+        return lastIt;
+    }
+    public void remove(int value){
+        int k = value;
+        Item lastIt;
+        if (head.value == k) head = head.next;
+        Item newNext = head.next;
+        lastIt = newNext;
+        if (newNext.value == k) {
+            head = newNext.next;
+        } else {
+            do {
+                if (newNext.value == k) lastIt.next = newNext.next;
+                lastIt = newNext;
+            } while (lastIt.next != null);
+        }
+
     }
 
     public static void main(String[] args){
         Item head = new Item();
         IntList newList = new IntList(head);
+
         Scanner input = new Scanner(System.in);
         System.out.println("Введите содержание начального объекта: ");
         int val = input.nextInt();
         head.value = val;
         head.next = null;
-        System.out.println(head.value + " " + head.next);
-        Item newitem = new Item();
+        System.out.println("Значение заголовка " + head.value + " " + head.next);
+        Item newItem = new Item();
+        input = new Scanner(System.in);
         System.out.println("Введите содержание нового объекта: ");
         val = input.nextInt();
-        newitem = newList.add(val);
-        System.out.println(newitem.value + " " + newitem.next + " при этом nextitem head = " + head.next);
+        newItem.value = val;
+        newItem.next = null;
+        newList.add(val);
+        System.out.println(newItem.value + " " + newItem.next + " при этом next head = " + head.next);
+        Item l = new Item();
+        l = newList.get(val);
+        System.out.println(l.value);
+
     }
 }

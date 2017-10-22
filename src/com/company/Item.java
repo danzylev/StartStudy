@@ -6,7 +6,12 @@ public class Item {
 
     public void Item(int value){
         this.value = value;
-        this.next = null;
+        next = null;
+    }
+
+    public void Item() {
+        value = 0;
+        next = null;
     }
 
 }

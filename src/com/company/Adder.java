@@ -6,7 +6,7 @@ public class Adder {
     public Adder (int step){
 
         this.step = step;
-        this.i = 0;
+        i = 0;
     }
 
     public void add(){
