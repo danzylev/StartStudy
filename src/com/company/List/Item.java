@@ -1,4 +1,4 @@
-package com.company;
+package com.company.List;
 
 public class Item {
     int value;
@@ -6,7 +6,7 @@ public class Item {
 
     public void Item(int value){
         this.value = value;
-        next = null;
+        this.next = null;
     }
 
     public void Item() {
