@@ -11,6 +11,7 @@ public class Lect3multMass {
         learnArrays2_2();
         learnArrays2_3();
         learnArrays2_4();
+        learnArrays2_5();
     }
 
     public static void learnArrays2_1() {
@@ -118,20 +119,34 @@ public class Lect3multMass {
         из таблицы умножения (от 2*2 до 9*9, потому что задания по умножению на 1 и на 10 — слишком просты).
         При этом среди 15 примеров не должно быть повторяющихся (примеры 2*3 и 3*2 и им подобные пары считать повторяющимися).
          */
- /*       int arr[][] = new int[8][8];
+
+        //реализация довольно кривая, но необходимы результат будет получен.
+        System.out.println("Задачи на таблицу умножения:");
+        int arr[]= new int[8];
         int tab[][] = new int[15][2];
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < 8; i++) //заполняем массив от 2 до 9
             for (int k = 0; k < 8; k++) {
-                arr[i][k] = k+1;
-                //tab[i][k] =
+                arr[i] = k+2;
             }
-
-
-        for (int i = 0; i < 8; i++)
-            for (int k = 0; k < 8; k++)
-        System.out.println(arr[i][k]);
+        for (int i = 0; i < 4; i++) {
+            tab[i][0] = i + 2;
+            tab[i][1] = 9 - i;
+        }
+        for (int i = 0; i < 4; i++) {
+            tab[i + 4][0] = i + 6;
+            tab[i + 4][1] = 8 - i;
+        }
+        for (int i = 0; i < 4; i++){
+            tab[i + 8][0] = i + 2;
+            tab[i + 8][1] = 7 - i;
+        }
+        for (int i = 0; i < 3; i++){
+            tab[i + 12][0] = i + 6;
+            tab[i + 12][1] = 6 - i;
+        }
+        for (int i = 0; i < 15; i++)
+            System.out.println(tab[i][0] + " + " + tab[i][1]);
     }
-    */
 }
 
 
