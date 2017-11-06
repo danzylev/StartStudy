@@ -1,114 +1,45 @@
 package com.company;
 
+import java.nio.charset.Charset;
+import java.util.Base64;
+
 public class Main {
+    private static final Charset UTF_8 = Charset.forName("utf-8");
 
     public static void main(String[] args) {
-        System.out.println("HelloWorld!!!");
-        //Первый модуль. Выдает на экран "HelloWorld!!!"
-        Main.task1();
-        Main.task1ver2();
-        Main.task2();
-        Main.task2ver2();
-        Main.task3();
-        Main.task4();
+        String text = "раз два три";
+//        String text = "one two three";
+        String key = "key";
+
+        String encrypted = encrypt(text, key);
+
+        System.out.println(encrypted);
+
+        String decrypted = decrypt(encrypted, key);
+
+        System.out.println(decrypted);
     }
 
-    public static void task1() {
-        /*
-        1) В переменных q и w хранятся два натуральных числа. Создайте программу, выводящую на экран результат деления q на w с остатком.
-        Пример вывода программы (для случая, когда в q хранится 21, а в w хранится 8):  
-        21 / 8 = 2 и 5 в остатке
+    private static String encrypt(String text, String key) {
+        byte[] textBytes = text.getBytes(UTF_8);
+        byte[] keyBytes = key.getBytes(UTF_8);
 
-         */
-        int q = 25;                 //задаем два числа
-        int w = 10;
-        int res1 = q / w;           //получаем целую часть делением
-        int res2 = q - (w * res1);  //вычисляем остаток
+        crypt(textBytes, keyBytes);
 
-        System.out.println("Первый способ. Результат деления " + q + " на " + w + " с остатокм составляет " + res1 + " и остаток " + res2);
+        return Base64.getEncoder().encodeToString(textBytes);
     }
 
-    public static void task1ver2() {
-        /*
-        Второй вариант реализации
-        1) В переменных q и w хранятся два натуральных числа. Создайте программу, выводящую на экран результат деления q на w с остатком.
-        Пример вывода программы (для случая, когда в q хранится 21, а в w хранится 8):  
-        21 / 8 = 2 и 5 в остатке
+    private static String decrypt(String encrypted, String key) {
+        byte[] textBytes = Base64.getDecoder().decode(encrypted);
+        byte[] keyBytes = key.getBytes(UTF_8);
 
-         */
-        int q = 25;                 //задаем два числа
-        int w = 10;
-        int res1 = q / w;           //получаем целую часть делением
-        int res2 = q % w;           //вычисляем остаток оператором остаток от деления
+        crypt(textBytes, keyBytes);
 
-        System.out.println("Второй способ. Результат деления " + q + " на " + w + " с остатокм составляет " + res1 + " и остаток " + res2);
+        return new String(textBytes, UTF_8);
     }
 
-
-    public static void task2() {
-        /*
-        Первый вариант реализации. Плох тем, что если указать число с меньшим количеством знаков, то результат будет некорректный. 06, например.
-        2) В переменной n хранится натуральное двузначное число. Создайте программу, вычисляющую и выводящую на экран сумму цифр числа n.
-         */
-        int aa = 56;                 //задаем натуральное двузначное число
-        int ab = aa;                 //задаем число, которое можем портить для извлечения десятков
-        int a1 = 0;                  //задаем число, которое будет счетчиком десятков
-        do  {                        //считаем количество десятков
-            ab = ab - 10;
-            a1 = a1 + 1;
-        } while (ab >= 10);
-
-        int a2 = aa - a1*10;         //это вторая цифра (единицы)
-
-        int res = a1 + a2;           //складываем
-
-        System.out.println("Первый способ. Сумма цифр натурального двузначного числа " + aa + " составляет " +  res);
+    private static void crypt(byte[] textBytes, byte[] keyBytes) {
+        for (int i = 0; i < textBytes.length; i++)
+            textBytes[i] ^= keyBytes[i % keyBytes.length];
     }
-
-    public static void task2ver2() {
-        /*
-        Второй вариант реализации
-        2) В переменной n хранится натуральное двузначное число. Создайте программу, вычисляющую и выводящую на экран сумму цифр числа n.
-         */
-        int aa = 56;                  //задаем натуральное двузначное число
-        int a1 = aa / 10;             //получаем первую цифру
-        int a2 = aa % 10;             //получаем вторую цифру
-        int res = a1 + a2;           //складываем
-
-        System.out.println("Второй способ. Сумма цифр натурального двузначного числа " + aa + " составляет " +  res);
-    }
-
-    public static void task3() {
-        /*
-        Округляет по правилам округления, ориентируясь только на первый знак после запятой.
-        Число, например, 1,47 округлит неверно. до 1.
-        Для бесконечного количества знаков можно циклом попробовать.
-        3) В переменной n хранится вещественное число с ненулевой дробной частью.
-        Создайте программу, округляющую число n до ближайшего целого и выводящую результат на экран.
-         */
-        double n = 5.72;
-        int n1 = (int) n;       //получаем целую часть отбрасыванием дробной части
-        int n3 = (int) (n * 10);//умножаем на десять, чтобы в дальнейшем посмотреть на первый знак после запятой
-        int n2 = n3 - n1 * 10;  //получаем выделенный первый знак после запятой
-        if (n2>=5) n1 += 1;     //сравниваем его с 5
-
-        System.out.println("Округление числа " + n + " даст результат " + n1);
-
-    }
-
-    public static void task4() {
-        /*
-        4) В переменной n хранится натуральное трёхзначное число. Создайте программу, вычисляющую и выводящую на экран сумму цифр числа n.
-         */
-        int num = 557;               //задаем натуральное трехзначное число
-        int n1 = num / 100;          //получаем первый знак
-        int n2 = num / 10 - n1 * 10; //получаем второй знак
-        int n3 = num % 10;           //получаем третий знак
-
-        int res = n1 + n2 + n3; //складываем
-
-        System.out.println("Сумма цифр натурального трехзначного числа " + num + " составляет " +  res);
-    }
-
 }
-//данный проект актуален

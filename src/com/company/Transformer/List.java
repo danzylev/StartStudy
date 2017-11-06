@@ -1,14 +1,13 @@
-package com.company.List;
+package com.company.Transformer;
 
-public class IntList {
+public class List {
 
     Item head;
 
-    public IntList(Item x) {
+    public List(Item x) {
         head = x;
     }
-    public IntList(){
-
+    public List(){
     }
 
     public void add(int j) {
