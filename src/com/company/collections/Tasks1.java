@@ -18,17 +18,16 @@ public class Tasks1 {
         List<Message> messages = generator.generate(10);
 
         countEachPriority(messages);
-        removeEach(messages, LOW);
-        removeOther(generator.generate(100), MessagePriority.URGENT);
-
-        /*countCountEachCode(messages);
+        removeEach(generator.generate(100), MessagePriority.LOW);
+        removeOther(generator.generate(20), MessagePriority.URGENT);
         countUniqueMessages(messages);
+        //countCountEachCode(messages);
+
 
         System.out.println("Genuine messages in natural order: \n" + genuineMessagesInOriginalOrder(messages));
 
-        removeEach(generator.generate(100), MessagePriority.LOW);
 
-        */
+
     }
 
     private static void countEachPriority(List<Message> messages) {
@@ -61,7 +60,15 @@ public class Tasks1 {
     private static void countCountEachCode(List<Message> messages) {
         // Сосчитайте количество сообщений для каждого кода сообщения.
         // Ответ необходимо вывести в консоль.
+        // TODO
 
+        Set<Message> set = new HashSet<>();
+        int i = messages.size();
+        int[] count = new int[i];
+        int k = 0;
+        for (Message mess : messages){
+
+        }
 
         // TODO implement
     }
@@ -70,7 +77,11 @@ public class Tasks1 {
         // Сосчитайте количество уникальных сообщений.
         // Ответ необходимо вывести в консоль.
 
-        // TODO implement
+        Set<Message> unique = new HashSet<Message>();
+        for (Message mess : messages){
+            unique.add(mess);
+        }
+        System.out.println("Count of unique messages = " + unique.size());
     }
 
     private static List<Message> genuineMessagesInOriginalOrder(List<Message> messages) {
@@ -89,7 +100,7 @@ public class Tasks1 {
             mr.add(mess);
         messages = mr;
 
-        return messages;
+        return mr;
     }
 
     private static void removeEach(Collection<Message> messages, MessagePriority priority) {

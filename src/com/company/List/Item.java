@@ -1,17 +1,18 @@
 package com.company.List;
 
 public class Item {
-    int value;
-    Item next;
+    public Object value;
+    public Item next;
 
-    public void Item(int value){
+    public Item(){}
+
+    public Item(Object value){
         this.value = value;
-        this.next = null;
     }
 
-    public void Item() {
-        value = 0;
-        next = null;
+    public Item(Object value, Item item){
+        this.value = value;
+        this.next = item;
     }
-
 }
+
